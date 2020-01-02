@@ -8,4 +8,8 @@ FROM base
 COPY --from=builder /install /usr/local
 COPY findandreplace.py /app/findandreplace.py
 WORKDIR /app
+RUN apk add --no-cache \
+    git \
+    openssh
+RUN export GIT_PYTHON_REFRESH=quiet
 CMD ["python", "findandreplace.py"]

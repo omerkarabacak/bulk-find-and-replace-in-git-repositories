@@ -34,14 +34,14 @@ Build Docker image:
 ```ssh
 docker build -t bulk-find-and-replace-in-git-repositories:1.0 .
 ```
-Run built local Docker image:
+Run with built local Docker image:
 ```ssh
-docker run --rm -v $(pwd)/config.json:/app/config.json -v $(pwd):/app/repositories bulk-find-and-replace-in-git-repositories:1.0
+docker run --rm -v $(pwd)/config.json:/app/config.json -v $(pwd)/repositories:/app/repositories -v ~/.ssh/id_rsa:/root/.ssh/id_rsa bulk-find-and-replace-in-git-repositories:1.0
 ```
 #### Option 2: Use public Docker image hosted on Docker Hub
-Run public Docker image:
+Run with public Docker image:
 ```ssh
-docker run --rm -v $(pwd)/config.json:/app/config.json -v $(pwd):/app/repositories omerkarabacak/bulk-find-and-replace-in-git-repositories:1.0
+docker run --rm -v $(pwd)/config.json:/app/config.json -v $(pwd)/repositories:/app/repositories -v ~/.ssh/id_rsa:/root/.ssh/id_rsa omerkarabacak/bulk-find-and-replace-in-git-repositories:1.0
 ```
 ### How to run with Python virtual environment?
 First create virtual environment
