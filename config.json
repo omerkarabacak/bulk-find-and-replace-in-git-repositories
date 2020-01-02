@@ -1,0 +1,33 @@
+{
+  "repository_list": [
+    [
+      "JIRA-id-1111",
+      "git@gitlab.example.com:micro-services/example-service-1.git"
+    ],
+    [
+      "JIRA-id-1112",
+      "git@gitlab.example.com:micro-services/example-service-2.git"
+    ]
+  ],
+  "find_and_replace_list": [
+    [
+      "cron(0 0 5 1/1 * ? *)",
+      "cron(0 0 5 ? * MON,TUE,WED,THU,FRI *)"
+    ],
+    [
+      "cron(0 0 20 1/1 * ? *)",
+      "cron(0 0 20 ? * MON,TUE,WED,THU,FRI *)"
+    ]
+  ],
+  "file_list": [
+    "infrastructure/stack-scaling-dev.yml",
+    "infrastructure/stack-scaling-int.yml",
+    "infrastructure/stack-scaling-test.yml"
+  ],
+  "commit_message": "{} Changed autoscaling schedule for dev, int and test environments",
+  "base_branch": "develop",
+  "repositories_directory": "repositories/",
+  "repository_author_name": "Omer Karabacak",
+  "repository_author_email": "email@example.com",
+  "ssh_key": "~/.ssh/id_rsa"
+}

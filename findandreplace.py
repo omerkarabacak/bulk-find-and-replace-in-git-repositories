@@ -1,6 +1,7 @@
 import fileinput
 import os
 import git
+import json
 
 
 class Author:
@@ -8,39 +9,19 @@ class Author:
     email: str
 
 
-repository_list = [
-    [
-        'JIRA-id-1111',
-        'git@gitlab.example.com:micro-services/example-service-1.git'
-    ],
-    [
-        'JIRA-id-1112',
-        'git@gitlab.example.com:micro-services/example-service-2.git'
-    ]
-]
-find_and_replace_list = [
-    [
-        'cron(0 0 5 1/1 * ? *)',
-        'cron(0 0 5 ? * MON,TUE,WED,THU,FRI *)'
-    ],
-    [
-        'cron(0 0 20 1/1 * ? *)',
-        'cron(0 0 20 ? * MON,TUE,WED,THU,FRI *)'
-    ]
-]
-file_list = [
-    'infrastructure/stack-scaling-dev.yml',
-    'infrastructure/stack-scaling-int.yml',
-    'infrastructure/stack-scaling-test.yml'
-]
-commit_message = '{} Changed autoscaling schedule for dev, int and test environments'
-base_branch = 'develop'
-repositories_directory = 'repositories/'
+with open('config.json') as config_file:
+    config = json.load(config_file)
 
+repository_list = config['repository_list']
+find_and_replace_list = config['find_and_replace_list']
+file_list = config['file_list']
+commit_message = config['commit_message']
+base_branch = config['base_branch']
+repositories_directory = config['repositories_directory']
 repository_author = Author
-repository_author.name = 'Omer Karabacak'
-repository_author.email = 'email@example.com'
-ssh_key = '~/.ssh/id_rsa'
+repository_author.name = config['repository_author_name']
+repository_author.email = config['repository_author_email']
+ssh_key = config['ssh_key']
 
 for repository in repository_list:
     ticket_id = repository[0]

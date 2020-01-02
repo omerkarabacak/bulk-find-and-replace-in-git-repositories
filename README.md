@@ -6,7 +6,13 @@ Script is creating a new branch from the given base branch and committing change
 
 *I used this script for changing the auto scaling config inside the Cloudformation templates for multiple micro services in our project.*
 
-## What to configure before run?
+## How to run the script?
+First clone repository
+```ssh
+git clone https://github.com/omerkarabacak/bulk-find-and-replace-in-git-repositories.git
+```
+### What to do before run?
+In config.json file, change these;
 
 * Add your new branch names and repositories in **repository_list**
 * Add texts to find and replace **find_and_replace_list**
@@ -19,8 +25,25 @@ Script is creating a new branch from the given base branch and committing change
 * Change SSH key path if you need something specific **ssh_key**
 
 You are ready to go!
+### How to run with Docker?
+There are 2 options.
+You can build your Docker image with Dockerfile or use ready public Docker image from Docker Hub.
 
-## How to run?
+#### Option 1: Build your own Docker image and use it
+Build Docker image:
+```ssh
+docker build -t bulk-find-and-replace-in-git-repositories:1.0 .
+```
+Run built local Docker image:
+```ssh
+docker run --rm -v $(pwd)/config.json:/app/config.json -v $(pwd):/app/repositories bulk-find-and-replace-in-git-repositories:1.0
+```
+#### Option 2: Use public Docker image hosted on Docker Hub
+Run public Docker image:
+```ssh
+docker run --rm -v $(pwd)/config.json:/app/config.json -v $(pwd):/app/repositories omerkarabacak/bulk-find-and-replace-in-git-repositories:1.0
+```
+### How to run with Python virtual environment?
 First create virtual environment
 ```ssh
 python3 -m venv env
@@ -38,5 +61,5 @@ Run script
 python findandreplace.py
 ```
 
-## Which Python version?
+#### Which Python version?
 Tested with 3.6.8
