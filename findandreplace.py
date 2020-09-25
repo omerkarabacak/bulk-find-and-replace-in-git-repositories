@@ -45,3 +45,5 @@ for repository in repository_list:
             file.close()
         cloned_repository.index.add(path_to_repository_file)
     cloned_repository.index.commit(commit_message.format(ticket_id), author=repository_author)
+    origin = cloned_repository.remote(name='origin')
+    origin.push(new_branch)
