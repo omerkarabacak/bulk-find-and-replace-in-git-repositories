@@ -36,14 +36,19 @@ for repository in repository_list:
         for texts in find_and_replace_list:
             text_to_find = texts[0]
             text_to_replace = texts[1]
-            file = open(path_to_repository_file, 'r')
-            current_file_data = file.read()
-            file.close()
-            new_file_data = current_file_data.replace(text_to_find, text_to_replace)
-            file = open(path_to_repository_file, 'w')
-            file.write(new_file_data)
-            file.close()
-        cloned_repository.index.add(path_to_repository_file)
+            repo_file = pathlib.Path(path_to_repository_file)
+            if repo_file.exists():
+                file = open(path_to_repository_file, 'r')
+                current_file_data = file.read()
+                file.close()
+                new_file_data = current_file_data.replace(text_to_find, text_to_replace)
+                file = open(path_to_repository_file, 'w')
+                file.write(new_file_data)
+                file.close()
+            else:
+                print("Ignoring "+path_to_repository_file+". Not found")
+        if repo_file.exists():
+            cloned_repository.index.add(path_to_repository_file)
     cloned_repository.index.commit(commit_message.format(ticket_id), author=repository_author)
     origin = cloned_repository.remote(name='origin')
     origin.push(new_branch)
