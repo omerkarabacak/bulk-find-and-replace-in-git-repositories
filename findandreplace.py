@@ -33,11 +33,11 @@ for repository in repository_list:
     new_branch.checkout()
     for checked_file in file_list:
         path_to_repository_file = os.path.join(path_to_repository, checked_file)
-        for texts in find_and_replace_list:
-            text_to_find = texts[0]
-            text_to_replace = texts[1]
-            repo_file = pathlib.Path(path_to_repository_file)
-            if repo_file.exists():
+        repo_file = pathlib.Path(path_to_repository_file)
+        if repo_file.exists():
+            for texts in find_and_replace_list:
+                text_to_find = texts[0]
+                text_to_replace = texts[1]
                 file = open(path_to_repository_file, 'r')
                 current_file_data = file.read()
                 file.close()
@@ -45,10 +45,9 @@ for repository in repository_list:
                 file = open(path_to_repository_file, 'w')
                 file.write(new_file_data)
                 file.close()
-            else:
-                print("Ignoring "+path_to_repository_file+". Not found")
-        if repo_file.exists():
             cloned_repository.index.add(path_to_repository_file)
+        else:
+            print("Ignoring "+path_to_repository_file+". Not found")
     cloned_repository.index.commit(commit_message.format(ticket_id), author=repository_author)
     origin = cloned_repository.remote(name='origin')
     origin.push(new_branch)
