@@ -6,6 +6,7 @@ COPY requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 FROM base
 COPY --from=builder /install /usr/local
+RUN true
 COPY findandreplace.py /app/findandreplace.py
 WORKDIR /app
 RUN apk add --no-cache \
