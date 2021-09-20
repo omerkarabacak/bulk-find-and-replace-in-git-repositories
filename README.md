@@ -32,16 +32,16 @@ You can build your Docker image with Dockerfile or use ready public Docker image
 #### Option 1: Build your own Docker image and use it
 Build Docker image:
 ```ssh
-docker build -t bulk-find-and-replace-in-git-repositories:1.0 .
+docker build -t bulk-find-and-replace-in-git-repositories:1.1 .
 ```
 Run with built local Docker image:
 ```ssh
-docker run --rm -v $(pwd)/config.json:/app/config.json -v $(pwd)/repositories:/app/repositories -v ~/.ssh/id_rsa:/root/.ssh/id_rsa bulk-find-and-replace-in-git-repositories:1.0
+docker run --rm -v $(pwd)/config.json:/app/config.json -v $(pwd)/repositories:/app/repositories -v ~/.ssh/id_rsa:/root/.ssh/id_rsa bulk-find-and-replace-in-git-repositories:1.1
 ```
 #### Option 2: Use public Docker image hosted on Docker Hub
 Run with public Docker image:
 ```ssh
-docker run --rm -v $(pwd)/config.json:/app/config.json -v $(pwd)/repositories:/app/repositories -v ~/.ssh/id_rsa:/root/.ssh/id_rsa omerkarabacak/bulk-find-and-replace-in-git-repositories:1.0
+docker run --rm -v $(pwd)/config.json:/app/config.json -v $(pwd)/repositories:/app/repositories -v ~/.ssh/id_rsa:/root/.ssh/id_rsa ghcr.io/omerkarabacak/bulk-find-and-replace-in-git-repositories:1.1
 ```
 ### How to run with Python virtual environment?
 First create virtual environment
