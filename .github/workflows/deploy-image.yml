@@ -1,4 +1,4 @@
-name: Demo Push
+name: Push to ghcr.io
 
 on:   
   push:
@@ -13,7 +13,7 @@ env:
   IMAGE_NAME: bulk-find-and-replace-in-git-repositories
 
 jobs:
-  push:
+  push-to-ghcr:
     runs-on: ubuntu-latest
     permissions:
       packages: write
